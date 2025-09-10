@@ -1,185 +1,210 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Oasis Champions Cup 2025 — Registration</title>
-<style>
-  body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f7f9fc}
-  header{background:#1e3c72;color:#fff;padding:20px;text-align:center}
-  main{max-width:900px;margin:25px auto;padding:20px;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
-  h2{color:#1e3c72;margin-top:0}
-  form{margin-top:15px;padding:15px;background:#f4f7fb;border-radius:8px}
-  label{display:block;margin-top:10px;font-weight:600}
-  input,textarea,select{width:100%;padding:8px;margin-top:5px;border:1px solid #ccc;border-radius:6px}
-  button{margin-top:12px;padding:10px 16px;background:#1e3c72;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:700}
-  button:hover{background:#16305a}
-  .highlight{background:#ffefc1;padding:10px;border-radius:6px;margin:12px 0;font-weight:bold}
-  .hidden{display:none}
-  .committee{margin-top:40px;padding:15px;background:#eef1f9;border-radius:8px}
-  table{border-collapse:collapse;width:100%;margin-top:15px}
-  th,td{border:1px solid #ccc;padding:6px;text-align:left;font-size:14px}
-  pre{white-space:pre-wrap;word-wrap:break-word;margin:0}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oasis Champions Cup 2025</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      color: #fff;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+    }
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      padding: 30px;
+    }
+    h2 {
+      color: #1e3c72;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 8px;
+      margin-top: 30px;
+    }
+    ul {
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+    form {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    input, button {
+      margin: 8px 0;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #1e3c72;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #2a5298;
+    }
+    .qr-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    #qrcode {
+      margin-top: 10px;
+    }
+    .admin-section {
+      margin-top: 50px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .suspicious { color: red; font-weight: bold; }
+    .valid { color: green; font-weight: bold; }
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+      color: #fff;
+      background: rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
 
 <header>
-  <h1>Oasis Champions Cup 2025</h1>
-  <p>Near Mathamangalam Govt. School</p>
+  <h1>🏆 Oasis Champions Cup 2025 🏆</h1>
+  <p>September 20–21, 2025 • Near Mathamangalam Govt. School</p>
 </header>
 
 <main>
-  <h2>Event Details</h2>
-  <p>📅 October 1–2, 2025</p>
-  <p class="highlight">Entry Fee: ₹300 per team</p>
+  <h2>Eligibility</h2>
+  <ul>
+    <li>Participants must be born on or after <b>January 1, 2011</b>.</li>
+    <li>Valid ID required at registration.</li>
+    <li>Open to all teams (boys & girls).</li>
+  </ul>
 
   <h2>Prizes</h2>
   <ul>
-    <li>🥇 Winners: ₹1800 + Trophy</li>
-    <li>🥈 Runners-up: ₹800</li>
+    <li>🥇 First Prize: ₹1800 + Trophy</li>
+    <li>🥈 Runner-up: ₹800 + Trophy</li>
+    <li>💰 Entry Fee: ₹300 per team</li>
   </ul>
 
-  <h2>Team Registration</h2>
-  <form id="teamForm">
-    <label>Team Name</label>
-    <input name="team" required>
-
-    <label>Captain Name</label>
-    <input name="captain" required>
-
-    <label>Players (Name - YYYY-MM-DD, one per line)</label>
-    <textarea name="players" rows="5" required></textarea>
-
-    <label>Contact Email</label>
-    <input type="email" name="email">
-
-    <button type="submit">Submit Team</button>
+  <h2>Register Your Team</h2>
+  <form id="regForm">
+    <input type="text" id="teamName" placeholder="Team Name" required>
+    <input type="text" id="captainName" placeholder="Captain Name" required>
+    <input type="number" id="players" placeholder="Number of Players (5-15)" min="5" max="15" required>
+    <button type="submit">Register Team</button>
   </form>
 
-  <h2>Individual Player Registration</h2>
-  <form id="playerForm">
-    <label>Full Name</label>
-    <input name="name" required>
+  <div class="qr-container">
+    <h2>Scan to Visit Website</h2>
+    <canvas id="qrcode"></canvas>
+  </div>
 
-    <label>Date of Birth</label>
-    <input type="date" name="dob" required>
+  <div class="admin-section">
+    <h2>Admin Login</h2>
+    <input type="password" id="adminPass" placeholder="Enter Password">
+    <button onclick="checkAdmin()">Login</button>
 
-    <label>Preferred Position</label>
-    <select name="position" required>
-      <option value="">-- Select --</option>
-      <option>Goalkeeper</option>
-      <option>Defender</option>
-      <option>Midfielder</option>
-      <option>Forward</option>
-    </select>
-
-    <label>Email</label>
-    <input type="email" name="email">
-
-    <button type="submit">Submit Player</button>
-  </form>
-
-  <div class="committee">
-    <h2>Committee Login</h2>
-    <form id="loginForm">
-      <label>Password</label>
-      <input type="password" id="committeePass">
-      <button type="submit">Login</button>
-    </form>
-
-    <div id="committeePanel" class="hidden">
+    <div id="adminPanel" class="hidden">
       <h3>All Registrations</h3>
-      <button id="downloadBtn">Download CSV</button>
-      <table id="registrations">
-        <thead><tr><th>Type</th><th>Details</th></tr></thead>
-        <tbody></tbody>
-      </table>
+      <ul id="regList"></ul>
     </div>
   </div>
 </main>
 
+<footer>
+  <p>© 2025 Oasis Mathamangalam • Organized by Oasis Jr Committee</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 <script>
-const cutoff = new Date("2011-01-01");
-let registrations = [];
-
-// === AI-style fake check ===
-function isFake(data) {
-  let text = JSON.stringify(data).toLowerCase();
-  if (text.includes("aaa") || text.includes("xxx") || text.includes("111")) return true;
-  if (data.dob) {
-    let dob = new Date(data.dob);
-    if (dob < cutoff) return true;
-  }
-  return false;
-}
-
-// Handle team form
-document.getElementById("teamForm").onsubmit = e => {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(e.target).entries());
-  if (isFake(data)) {
-    if (!confirm("⚠️ This registration looks suspicious. Do you still want to submit?")) return;
-  }
-  registrations.push({type:"Team",data});
-  alert("✅ Team registered successfully!");
-  e.target.reset();
-  renderRegistrations();
-};
-
-// Handle player form
-document.getElementById("playerForm").onsubmit = e => {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(e.target).entries());
-  if (isFake(data)) {
-    if (!confirm("⚠️ This registration looks suspicious. Do you still want to submit?")) return;
-  }
-  registrations.push({type:"Player",data});
-  alert("✅ Player registered successfully!");
-  e.target.reset();
-  renderRegistrations();
-};
-
-// Committee login
-document.getElementById("loginForm").onsubmit = e => {
-  e.preventDefault();
-  const pass = document.getElementById("committeePass").value;
-  if (pass === "occ2k25") {
-    document.getElementById("committeePanel").classList.remove("hidden");
-    renderRegistrations();
-  } else {
-    alert("❌ Wrong password");
-  }
-};
-
-// Render registrations
-function renderRegistrations(){
-  const tbody = document.querySelector("#registrations tbody");
-  tbody.innerHTML = "";
-  registrations.forEach(r=>{
-    let tr = document.createElement("tr");
-    tr.innerHTML = `<td>${r.type}</td><td><pre>${JSON.stringify(r.data,null,2)}</pre></td>`;
-    tbody.appendChild(tr);
-  });
-}
-
-// Download CSV
-document.getElementById("downloadBtn").onclick = () => {
-  if(registrations.length === 0){ alert("No registrations yet"); return; }
-
-  let csv = "Type,Details\n";
-  registrations.forEach(r=>{
-    csv += `"${r.type}","${JSON.stringify(r.data).replace(/"/g,'""')}"\n`;
+  // Generate QR Code
+  const websiteURL = window.location.href;
+  new QRious({
+    element: document.getElementById("qrcode"),
+    value: websiteURL,
+    size: 200
   });
 
-  const blob = new Blob([csv], {type:"text/csv"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "registrations.csv";
-  a.click();
-  URL.revokeObjectURL(url);
-};
+  // Load registrations
+  function loadRegistrations() {
+    const regList = document.getElementById("regList");
+    regList.innerHTML = "";
+    const regs = JSON.parse(localStorage.getItem("registrations")) || [];
+    regs.forEach((r, i) => {
+      const li = document.createElement("li");
+      li.innerHTML = `${i+1}. <b>${r.team}</b> (Captain: ${r.captain}, Players: ${r.players}) 
+        - <span class="${r.status === 'Suspicious' ? 'suspicious' : 'valid'}">${r.status}</span>`;
+      regList.appendChild(li);
+    });
+  }
+
+  // AI-like check for suspicious entries
+  function isSuspicious(team, captain, players) {
+    if (team.length < 3) return true;
+    if (/[^a-zA-Z\s]/.test(captain)) return true;
+    if (players < 5 || players > 15) return true;
+
+    const regs = JSON.parse(localStorage.getItem("registrations")) || [];
+    if (regs.some(r => r.team.toLowerCase() === team.toLowerCase())) return true;
+
+    return false;
+  }
+
+  // Handle registration form
+  document.getElementById("regForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const team = document.getElementById("teamName").value.trim();
+    const captain = document.getElementById("captainName").value.trim();
+    const players = parseInt(document.getElementById("players").value);
+
+    let status = isSuspicious(team, captain, players) ? "Suspicious" : "Valid";
+
+    const regs = JSON.parse(localStorage.getItem("registrations")) || [];
+    regs.push({ team, captain, players, status });
+    localStorage.setItem("registrations", JSON.stringify(regs));
+
+    alert(status === "Valid" ? "✅ Team registered successfully!" : "⚠️ Registration flagged as suspicious!");
+    document.getElementById("regForm").reset();
+
+    if (!document.getElementById("adminPanel").classList.contains("hidden")) {
+      loadRegistrations();
+    }
+  });
+
+  // Admin login
+  function checkAdmin() {
+    const pass = document.getElementById("adminPass").value;
+    if (pass === "occ2k25") {
+      document.getElementById("adminPanel").classList.remove("hidden");
+      loadRegistrations();
+    } else {
+      alert("❌ Wrong password!");
+    }
+  }
 </script>
 
 </body>
