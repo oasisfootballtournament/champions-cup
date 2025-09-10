@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Oasis Champions Cup 2025 — Registration</title>
+<style>
+  body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f7f9fc}
+  header{background:#1e3c72;color:#fff;padding:20px;text-align:center}
+  main{max-width:900px;margin:25px auto;padding:20px;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+  h2{color:#1e3c72;margin-top:0}
+  form{margin-top:15px;padding:15px;background:#f4f7fb;border-radius:8px}
+  label{display:block;margin-top:10px;font-weight:600}
+  input,textarea,select{width:100%;padding:8px;margin-top:5px;border:1px solid #ccc;border-radius:6px}
+  button{margin-top:12px;padding:10px 16px;background:#1e3c72;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:700}
+  button:hover{background:#16305a}
+  .highlight{background:#ffefc1;padding:10px;border-radius:6px;margin:12px 0;font-weight:bold}
+  .hidden{display:none}
+  .committee{margin-top:40px;padding:15px;background:#eef1f9;border-radius:8px}
+  table{border-collapse:collapse;width:100%;margin-top:15px}
+  th,td{border:1px solid #ccc;padding:6px;text-align:left;font-size:14px}
+  pre{white-space:pre-wrap;word-wrap:break-word;margin:0}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Oasis Champions Cup 2025</h1>
+  <p>Near Mathamangalam Govt. School</p>
+</header>
+
+<main>
+  <h2>Event Details</h2>
+  <p>📅 October 1–2, 2025</p>
+  <p class="highlight">Entry Fee: ₹300 per team</p>
+
+  <h2>Prizes</h2>
+  <ul>
+    <li>🥇 Winners: ₹1800 + Trophy</li>
+    <li>🥈 Runners-up: ₹800</li>
+  </ul>
+
+  <h2>Team Registration</h2>
+  <form id="teamForm">
+    <label>Team Name</label>
+    <input name="team" required>
+
+    <label>Captain Name</label>
+    <input name="captain" required>
+
+    <label>Players (Name - YYYY-MM-DD, one per line)</label>
+    <textarea name="players" rows="5" required></textarea>
+
+    <label>Contact Email</label>
+    <input type="email" name="email">
+
+    <button type="submit">Submit Team</button>
+  </form>
+
+  <h2>Individual Player Registration</h2>
+  <form id="playerForm">
+    <label>Full Name</label>
+    <input name="name" required>
+
+    <label>Date of Birth</label>
+    <input type="date" name="dob" required>
+
+    <label>Preferred Position</label>
+    <select name="position" required>
+      <option value="">-- Select --</option>
+      <option>Goalkeeper</option>
+      <option>Defender</option>
+      <option>Midfielder</option>
+      <option>Forward</option>
+    </select>
+
+    <label>Email</label>
+    <input type="email" name="email">
+
+    <button type="submit">Submit Player</button>
+  </form>
+
+  <div class="committee">
+    <h2>Committee Login</h2>
+    <form id="loginForm">
+      <label>Password</label>
+      <input type="password" id="committeePass">
+      <button type="submit">Login</button>
+    </form>
+
+    <div id="committeePanel" class="hidden">
+      <h3>All Registrations</h3>
+      <button id="downloadBtn">Download CSV</button>
+      <table id="registrations">
+        <thead><tr><th>Type</th><th>Details</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script>
+const cutoff = new Date("2011-01-01");
+let registrations = [];
+
+// === AI-style fake check ===
+function isFake(data) {
+  let text = JSON.stringify(data).toLowerCase();
+  if (text.includes("aaa") || text.includes("xxx") || text.includes("111")) return true;
+  if (data.dob) {
+    let dob = new Date(data.dob);
+    if (dob < cutoff) return true;
+  }
+  return false;
+}
+
+// Handle team form
+document.getElementById("teamForm").onsubmit = e => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target).entries());
+  if (isFake(data)) {
+    if (!confirm("⚠️ This registration looks suspicious. Do you still want to submit?")) return;
+  }
+  registrations.push({type:"Team",data});
+  alert("✅ Team registered successfully!");
+  e.target.reset();
+  renderRegistrations();
+};
+
+// Handle player form
+document.getElementById("playerForm").onsubmit = e => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target).entries());
+  if (isFake(data)) {
+    if (!confirm("⚠️ This registration looks suspicious. Do you still want to submit?")) return;
+  }
+  registrations.push({type:"Player",data});
+  alert("✅ Player registered successfully!");
+  e.target.reset();
+  renderRegistrations();
+};
+
+// Committee login
+document.getElementById("loginForm").onsubmit = e => {
+  e.preventDefault();
+  const pass = document.getElementById("committeePass").value;
+  if (pass === "occ2k25") {
+    document.getElementById("committeePanel").classList.remove("hidden");
+    renderRegistrations();
+  } else {
+    alert("❌ Wrong password");
+  }
+};
+
+// Render registrations
+function renderRegistrations(){
+  const tbody = document.querySelector("#registrations tbody");
+  tbody.innerHTML = "";
+  registrations.forEach(r=>{
+    let tr = document.createElement("tr");
+    tr.innerHTML = `<td>${r.type}</td><td><pre>${JSON.stringify(r.data,null,2)}</pre></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// Download CSV
+document.getElementById("downloadBtn").onclick = () => {
+  if(registrations.length === 0){ alert("No registrations yet"); return; }
+
+  let csv = "Type,Details\n";
+  registrations.forEach(r=>{
+    csv += `"${r.type}","${JSON.stringify(r.data).replace(/"/g,'""')}"\n`;
+  });
+
+  const blob = new Blob([csv], {type:"text/csv"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "registrations.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+};
+</script>
+
+</body>
+</html>
